@@ -1,0 +1,21 @@
+.wallpaper{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin : 0;
+    position: fixed;
+    left:20%;
+    /* position: fixed; */
+    /* float: left; */
+}
+
+.main_page{
+    /* background-image: url(''); */
+    background-color: #eee;
+    float: left;  
+    width: 80%;
+    height : 100%; 
+    padding: 0px;
+    margin: 4.4% 0% 0% 20%;
+}
+
