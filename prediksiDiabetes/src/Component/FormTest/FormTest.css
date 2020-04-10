@@ -7,10 +7,8 @@
 
 .label{
     position: relative;
-    margin: 7% 0% 0% 5%;
-    /* margin-right: 5%; */
-    /* margin-top: 5%; */
-    /* margin-bottom: 20px; */
+    /* margin: 7% 0% 0% 5%; */
+    margin: 8% 0% 0% 5%;
     color: black;
     width: 35%;
     float: left;
@@ -19,8 +17,8 @@
 
 .input{
     position: relative;
-    margin: 7% 0% 0% 0%;
-    /* margin-left : 5%; */
+    /* margin: 7% 0% 0% 0%; */
+    margin: 8% 0% 0% 0%;
     overflow-x: hidden;
     padding: 0;
     width: 58%;
@@ -37,6 +35,15 @@
     padding: 1.2% 0% 0.5% 1.5%;
     width : 40%;
     font-size: 13px;
+}
+
+.join{
+    width : 16.2%;
+    margin-right: 2%;
+}
+
+.icon{
+    margin-right: 2%;
 }
 
 label{
@@ -66,4 +73,20 @@ label{
     cursor: not-allowed;
 }
 
-
+.tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .hoverketerangan:hover .tooltiptext {
+    visibility: visible;
+  }

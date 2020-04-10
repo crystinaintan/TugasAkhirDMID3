@@ -47,6 +47,7 @@ class Middle extends React.Component{
     }
 
     render(){
+        console.log("Render MiddleComponent");
         return(
             <div className="main_page">
                 <img className="wallpaper" src={diabetes} alt=""/>
@@ -54,11 +55,15 @@ class Middle extends React.Component{
                     <Fragment>
                         <Switch>
                             <Route exact path="/test_diabetes_mellitus/lakukan_test_diabetes_mellitus"> */}
-                                <FormTest doTest = {{
-                                                    changeResultTestDiabetes : this.changeResultTestDiabetes.bind(this),
-                                                    changeResultTestImt : this.changeResultTestImt.bind(this),
-                                                    changeResultTestObesitas : this.changeResultTestObesitas.bind(this),
-                                                    changeResultTestTekananDarah : this.changeResultTestTekananDarah.bind(this)}}/>
+                                <FormTest doTest = {
+                                    {
+                                        hasilCekFormDiabetes : this.state.hasilCekFormDiabetes,
+                                        changeResultTestDiabetes : this.changeResultTestDiabetes.bind(this),
+                                        changeResultTestImt : this.changeResultTestImt.bind(this),
+                                        changeResultTestObesitas : this.changeResultTestObesitas.bind(this),
+                                        changeResultTestTekananDarah : this.changeResultTestTekananDarah.bind(this)
+                                    }
+                                }/>
                                 <Result data = {{
                                     hasilCekFormDiabetes: this.state.hasilCekFormDiabetes,
                                     hasilCekFormImt: this.state.hasilCekFormImt,
@@ -75,7 +80,7 @@ class Middle extends React.Component{
             </div>
         );
     }
-
+    
 }
 
 export default Middle;
