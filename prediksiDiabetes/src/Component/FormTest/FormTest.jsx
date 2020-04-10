@@ -30,9 +30,10 @@ class FormTest extends React.Component{
     }
 
     handleLahirChange = event => {
-        this.setState({
-            lahir : event.target.value
-        })
+        // this.setState({
+        //     lahir : event.target.value
+        // })
+        this.getYearFromLahir;
         document.getElementById("myDate").style.borderColor = "";
     }
 
@@ -108,7 +109,7 @@ class FormTest extends React.Component{
         console.log("state keluarga : ", this.state.keluarga);
     }
 
-    callapi(){
+    async callapi(){
         var data={
             "lahir": this.state.lahir,
             "hamil": this.state.hamil,
@@ -123,14 +124,23 @@ class FormTest extends React.Component{
             "keluarga": this.state.keluarga,
         };
         const url = "http://localhost:9000/api/prediksi_diabetes/:data";
-        fetch(url)
-        .then(res => res.json())
-        .then(res => this.setState({resDiabetes : res.result[0].diabetes, 
-                                    resImt : res.result[0].imt,
-                                    resObesitas : res.result[0].obesitas,
-                                    resTekananDarah : res.result[0].tekananDarah})
-        );
-       
+        // fetch(url)
+        // .then(res => res.json())
+        // .then(res => this.setState({resDiabetes : res.result[0].diabetes, 
+        //                             resImt : res.result[0].imt,
+        //                             resObesitas : res.result[0].obesitas,
+        //                             resTekananDarah : res.result[0].tekananDarah})
+        // );
+        const response = await fetch(url);
+        const res = await response.json();
+        this.setState({resDiabetes : res.result[0].diabetes, 
+                                        resImt : res.result[0].imt,
+                                        resObesitas : res.result[0].obesitas,
+                                        resTekananDarah : res.result[0].tekananDarah});
+       console.log("call API : ",this.state.resDiabetes);
+       console.log("call API : ",this.state.resImt);
+       console.log("call API : ",this.state.resObesitas);
+       console.log("call API : ",this.state.resTekananDarah);
     }
 
     handleSubmit = event =>{
@@ -234,6 +244,14 @@ class FormTest extends React.Component{
         }
     }
     
+    getYearFromLahir = () =>{
+        var date = new Date($('#myDate').val());
+        day = date.getDate();
+        month = date.getMonth() + 1;
+        year = date.getFullYear();
+        this.setState({lahir:year});
+    }
+
     render(){
         console.log("Render Form");
         return(
@@ -256,18 +274,18 @@ class FormTest extends React.Component{
                         <div className="input">
                             <input className="input_component" type="date" value={this.state.lahir} id="myDate" onChange={this.handleLahirChange}></input> <br></br>
                             <input className="input_component" type="number" value={this.state.hamil} id="quantity_pregnancy" onChange={this.handleHamilChange} name="pregnancy" min="0" max="10"></input> <br></br>
-                            <input className="input_component" type="number" value={this.state.glukosa} id="quantity_glucose" onChange={this.handleGlukosaChange} name="glucose" min="1" max="5"></input><label className="input_component">mg/dL</label> <br></br>
-                            <Tippy content='Tekanan Sistol / Batas Atas Tekanan Darah'><input className="input_component join" type="number" value={this.state.sistol} id="quantity_sistol" onChange={this.handleSistolChange} name="sistol" min="1" max="5"></input></Tippy>
+                            <input className="input_component" type="number" value={this.state.glukosa} id="quantity_glucose" onChange={this.handleGlukosaChange} name="glucose" min="1" max=""></input><label className="input_component">mg/dL</label> <br></br>
+                            <Tippy content='Tekanan Sistol / Batas Atas Tekanan Darah'><input className="input_component join" type="number" value={this.state.sistol} id="quantity_sistol" onChange={this.handleSistolChange} name="sistol" min="1" max=""></input></Tippy>
                             <label className="icon">/</label>
-                            <Tippy content='Tekanan Diastol / Batas Bawah Tekanan Darah'><input className="input_component join" type="number" value={this.state.diastol} id="quantity_diastol" onChange={this.handleDiastolChange} name="diastol" min="1" max="5"></input></Tippy><label className="input_component">mmHg</label><br></br>
+                            <Tippy content='Tekanan Diastol / Batas Bawah Tekanan Darah'><input className="input_component join" type="number" value={this.state.diastol} id="quantity_diastol" onChange={this.handleDiastolChange} name="diastol" min="1" max=""></input></Tippy><label className="input_component">mmHg</label><br></br>
                             {/* <Tippy content='Batas Atas Tekanan Darah'><input className="input_component" type="number" value={this.state.sistol} id="quantity_sistol" onChange={this.handleSistolChange} name="sistol" min="1" max="5"></input></Tippy><label className="input_component">mmHg</label><br></br>
                             <Tippy content='Batas Bawah Tekanan Darah'><input className="input_component" type="number" value={this.state.diastol} id="quantity_diastol" onChange={this.handleDiastolChange} name="diastol" min="1" max="5"></input></Tippy><label className="input_component">mmHg</label><br></br> */}
-                            <input className="input_component" type="number" value={this.state.kulit} id="quantity_skin_thickness" onChange={this.handleKulitChange} name="skin_thickness" min="1" max="5"></input> <br></br>
-                            <input className="input_component" type="number" value={this.state.insulin} id="quantity_cpeptida" onChange={this.handleInsulinChange} name="cpeptida" min="1" max="5"></input><label className="input_component">ng/mL</label><br></br>
-                            <input className="input_component" type="number" value={this.state.berat} id="quantity_weight" onChange={this.handleBeratChange} name="weight" min="1" max="5"></input><label className="input_component">Kg</label><br></br>
-                            <input className="input_component" type="number" value={this.state.tinggi} id="quantity_height" onChange={this.handleTinggiChange} name="height" min="1" max="5"></input><label className="input_component">Cm</label><br></br>
-                            <input className="input_component" type="number" value={this.state.keluargaD} id="quantity_family_diabetes" onChange={this.handleKeluargaDChange} name="family_diabetes" min="1" max="5"></input><label className="input_component">Orang</label><br></br>
-                            <input className="input_component" type="number" value={this.state.keluarga} id="quantity_family" name="family" onChange={this.handleKeluargaChange} min="1" max="5"></input><label className="input_component">Orang</label>
+                            <input className="input_component" type="number" value={this.state.kulit} id="quantity_skin_thickness" onChange={this.handleKulitChange} name="skin_thickness" min="1" max=""></input> <br></br>
+                            <input className="input_component" type="number" value={this.state.insulin} id="quantity_cpeptida" onChange={this.handleInsulinChange} name="cpeptida" min="1" max=""></input><label className="input_component">ng/mL</label><br></br>
+                            <input className="input_component" type="number" value={this.state.berat} id="quantity_weight" onChange={this.handleBeratChange} name="weight" min="1" max=""></input><label className="input_component">Kg</label><br></br>
+                            <input className="input_component" type="number" value={this.state.tinggi} id="quantity_height" onChange={this.handleTinggiChange} name="height" min="1" max=""></input><label className="input_component">Cm</label><br></br>
+                            <input className="input_component" type="number" value={this.state.keluargaD} id="quantity_family_diabetes" onChange={this.handleKeluargaDChange} name="family_diabetes" min="1" max=""></input><label className="input_component">Orang</label><br></br>
+                            <input className="input_component" type="number" value={this.state.keluarga} id="quantity_family" name="family" onChange={this.handleKeluargaChange} min="1" max=""></input><label className="input_component">Orang</label>
                             <button className="button_proses" id="prediksi" onClick={this.go_predict_klik} onMouseOver={this.go_predict_hover}>Proses</button>
                         </div>
                     </div>
