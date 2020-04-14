@@ -17,6 +17,15 @@ class Result extends React.Component{
         
     }
 
+    // componentDidUpdate(prevProps, prevState) {
+    //     // only update chart if the data has changed
+    //     if (this.state !== prevState) {
+    //       console.log("Component DId UPDATE() RESULTCOMPONENT");
+    //       console.log("ResultComponent : ",prevProps);
+    //       console.log("ResultComponent : ",this.state);
+    //     }
+    // }
+
     // callapi(){
     //     fetch("http://localhost:9000/api")
     //     .then(res => res.text())
@@ -111,7 +120,7 @@ class Result extends React.Component{
         // } else {
         //   x.style.display = "none";
         // }
-        this.callapi();
+        // this.callapi();
     }
     
     render(){

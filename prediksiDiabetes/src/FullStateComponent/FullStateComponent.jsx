@@ -8,6 +8,7 @@ import Home from '../Component/HomePage/HomePage';
 import DiabetesDefinition from '../Component/DiabetesDefinitionPage/DiabetesDefinition';
 import DiabetesMellitus from '../Component/DiabetesMellitusDefinitionPage/DiabetesMellitus';
 import BmiObesitas from '../Component/BmiObesitasPage/BmiObesitas';
+import DrawTree from '../../src/DrawTree/VisualizeTree';
 
 class Main extends Component{
     render(){
@@ -36,6 +37,7 @@ class Main extends Component{
                             <MenuBar />
                             <BmiObesitas />
                         </Route>
+                        {/* <Route path="/drawTree" exact component={DrawTree}/> */}
                     </Switch>
                 </Fragment>
             </Router>
