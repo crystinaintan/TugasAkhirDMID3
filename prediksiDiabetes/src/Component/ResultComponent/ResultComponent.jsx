@@ -122,7 +122,7 @@ class Result extends React.Component{
         // }
         // this.callapi();
     }
-    
+
     render(){
         console.log("Render Result");
         console.log("Isi hasil imt : ", this.state.hasilImt);

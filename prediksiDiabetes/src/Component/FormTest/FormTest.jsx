@@ -196,7 +196,10 @@ class FormTest extends React.Component{
         Method untuk get local storage data input user
     **/
     callBackDataUser = () =>{  
-        const date = new Date(localStorage.getItem('dulahir'));
+        // var moment = require('moment');
+        // const date = moment(localStorage.getItem('dulahir'), "MM-DD-YYYY");
+        // console.log("AGa : ", date);
+        const dateUser = localStorage.getItem('dulahir');
         const resDb = localStorage.getItem('resDiabetes');
         const resImt = localStorage.getItem('resImt');
         const resOb = localStorage.getItem('resObesitas');
@@ -204,7 +207,7 @@ class FormTest extends React.Component{
 
         localStorage.getItem('dulahir') && this.setState(
             {
-                lahir: date,
+                lahir: JSON.parse(dateUser),
                 hamil: JSON.parse(localStorage.getItem('duhamil')),
                 glukosa: JSON.parse(localStorage.getItem('duglukosa')),
                 sistol: JSON.parse(localStorage.getItem('dusistol')),
@@ -259,9 +262,14 @@ class FormTest extends React.Component{
             document.getElementById("prediksi").style.display = "inline-block";
             this.setState({resultExist : false}); 
         }
+        else{
+            document.getElementById("hasil").style.display = "block";
+            document.getElementById("prediksi").style.display = "none";
+        }
     }
 
     callAlert = () =>{
+        console.log("Result Exist di Form Test : ", this.state.resultExist);
         if(this.state.resultExist)
         {
             this.alertReInputDataUser();
