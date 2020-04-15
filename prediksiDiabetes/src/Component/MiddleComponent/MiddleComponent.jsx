@@ -14,7 +14,7 @@ class Middle extends React.Component{
             hasilCekFormDiabetes: 'gagal',
             hasilCekFormImt:'gagal',
             hasilCekFormObesitas:'gagal',
-            hasilCekFormTekananDarah:'gagal',
+            hasilCekFormTekananDarah:'gagal'
         }
     }
 

@@ -26,7 +26,8 @@ class FormTest extends React.Component{
             resDiabetes :'Berhasil',
             resImt:'Berhasil',
             resObesitas:'Berhasil',
-            resTekananDarah:'Berhasil'
+            resTekananDarah:'Berhasil',
+            resultExist : false
         }
 
     }
@@ -129,10 +130,11 @@ class FormTest extends React.Component{
                 "berat": this.state.berat,
                 "tinggi": this.state.tinggi,
                 "keluargaD":  this.state.keluargaD,
-                "keluarga": this.state.keluarga
+                "keluarga": this.state.keluarga,
+                "userBD" : this.state.lahir
             };
-        console.log("Ini Adalah var data : ", data);
-        console.log("Ini Adalah var stringify(data) : ", JSON.stringify(data));
+        //console.log("Ini Adalah var data : ", data);
+        //console.log("Ini Adalah var stringify(data) : ", JSON.stringify(data));
         const url = "http://localhost:9000/api/prediksi_diabetes";
         
         const requestOptions = {
@@ -145,22 +147,23 @@ class FormTest extends React.Component{
         fetch(url, requestOptions)
         .then(res =>  res.json())
         .then(res => { 
-            this.setState({resDiabetes : res.diabetes, 
-                           resImt : res.imt,
-                           resObesitas : res.obesitas,
-                           resTekananDarah : res.tekananDarah})
+            //console.log(res)
+            this.setState({resDiabetes : res[0].hasil.diabetes, 
+                           resImt : res[0].hasil.imt,
+                           resObesitas : res[0].hasil.obesitas,
+                           resTekananDarah : res[0].hasil.tekananDarah})
               this.props.doTest.changeResultTestDiabetes(this.state.resDiabetes)
               this.props.doTest.changeResultTestImt(this.state.resImt)
               this.props.doTest.changeResultTestObesitas(this.state.resObesitas)
               this.props.doTest.changeResultTestTekananDarah(this.state.resTekananDarah)})
-        console.log("call API : ",this.state.resDiabetes);
-        console.log("call API : ",this.state.resImt);
-        console.log("call API : ",this.state.resObesitas);
-        console.log("call API : ",this.state.resTekananDarah);
+        // console.log("call API : ",this.state.resDiabetes);
+        // console.log("call API : ",this.state.resImt);
+        // console.log("call API : ",this.state.resObesitas);
+        // console.log("call API : ",this.state.resTekananDarah);
 
         
 
-                
+        //--Sampah--       
         // fetch(url)
         // .then(res => res.json())
         // .then(res => this.setState({resDiabetes : res.result[0].diabetes, 
@@ -185,15 +188,117 @@ class FormTest extends React.Component{
         // console.log("Ini Isi Res : ", res);
     }
 
+    /*
+        Method untuk get local storage data input user
+    **/
+    callBackDataUser = () =>{  
+        const date = new Date(localStorage.getItem('dulahir'));
+        const resDb = localStorage.getItem('resDiabetes');
+        const resImt = localStorage.getItem('resImt');
+        const resOb = localStorage.getItem('resObesitas');
+        const resTD = localStorage.getItem('resTekananDarah');
+
+        localStorage.getItem('dulahir') && this.setState(
+            {
+                lahir: date,
+                hamil: JSON.parse(localStorage.getItem('duhamil')),
+                glukosa: JSON.parse(localStorage.getItem('duglukosa')),
+                sistol: JSON.parse(localStorage.getItem('dusistol')),
+                diastol: JSON.parse(localStorage.getItem('dudiastol')),
+                kulit: JSON.parse(localStorage.getItem('dukulit')),
+                insulin: JSON.parse(localStorage.getItem('duinsulin')),
+                berat: JSON.parse(localStorage.getItem('duberat')),
+                tinggi: JSON.parse(localStorage.getItem('dutinggi')),
+                keluargaD: JSON.parse(localStorage.getItem('dukeluargaD')),
+                keluarga: JSON.parse(localStorage.getItem('dukeluarga')),
+                resultExist: JSON.parse(localStorage.getItem('resultExist')),
+
+                resDiabetes: JSON.parse(resDb),
+                resImt: JSON.parse(resImt),
+                resObesitas: JSON.parse(resOb),
+                resTekananDarah: JSON.parse(resTD)
+            } 
+        );
+        this.props.doTest.changeResultTestDiabetes(resDb);
+        this.props.doTest.changeResultTestImt(resImt);
+        this.props.doTest.changeResultTestObesitas(resOb);
+        this.props.doTest.changeResultTestTekananDarah(resTD);
+    }
+
+    /*
+        Method untuk set local storage untuk data input user
+    **/
+   setLocalStorageForDataUser = (nextProps, nextState) =>{  
+        localStorage.setItem('dulahir', JSON.stringify(nextState.lahir));
+        localStorage.setItem('duhamil', JSON.stringify(nextState.hamil));
+        localStorage.setItem('duglukosa', JSON.stringify(nextState.glukosa));
+        localStorage.setItem('dusistol', JSON.stringify(nextState.sistol));
+        localStorage.setItem('dudiastol', JSON.stringify(nextState.diastol));
+        localStorage.setItem('dukulit', JSON.stringify(nextState.kulit));
+        localStorage.setItem('duinsulin', JSON.stringify(nextState.insulin));
+        localStorage.setItem('duberat', JSON.stringify(nextState.berat));
+        localStorage.setItem('dutinggi', JSON.stringify(nextState.tinggi));
+        localStorage.setItem('dukeluargaD', JSON.stringify(nextState.keluargaD));
+        localStorage.setItem('dukeluarga', JSON.stringify(nextState.keluarga));
+        localStorage.setItem('resultExist', JSON.stringify(nextState.resultExist));
+
+        localStorage.setItem('resDiabetes', JSON.stringify(nextState.resDiabetes));
+        localStorage.setItem('resImt', JSON.stringify(nextState.resImt));
+        localStorage.setItem('resObesitas', JSON.stringify(nextState.resObesitas));
+        localStorage.setItem('resTekananDarah', JSON.stringify(nextState.resTekananDarah));
+   }
+
+    alertReInputDataUser = () => {
+        var r = window.confirm("Ingin Mengulangi Tes?");
+        if (r == true) {
+            document.getElementById("hasil").style.display = "none";
+            document.getElementById("prediksi").style.display = "inline-block";
+            this.setState({resultExist : false}); 
+        }
+    }
+
+    callAlert = () =>{
+        if(this.state.resultExist)
+        {
+            this.alertReInputDataUser();
+        }
+    }
+
+    componentWillMount = () =>{
+        this.callBackDataUser();
+        console.log("Component FORM WILL AMOUNT");
+    }
+
+    componentDidMount = () => {
+        
+        console.log("Component FORM DID Mount");
+        //Ini Untuk Bisa tetap munculin hasil kalau statusnya resultExist
+        if(this.state.resultExist == true)
+        {
+            document.getElementById("hasil").style.display = "block";
+            document.getElementById("prediksi").style.display = "none";
+            console.log("State resultExist");
+        }
+
+    }
+
+    componentWillUpdate = (nextProps, nextState) => {
+        this.setLocalStorageForDataUser(nextProps,nextState);
+        console.log("Component FORM WILL Update");
+    }
+
     handleSubmit = event =>{
         event.preventDefault();
         console.log("Handle Submit Form");
         this.callapi();
-        console.log("Call API");
-        console.log(this.state.resDiabetes);
-        console.log(this.state.resImt);
-        console.log(this.state.resObesitas);
-        console.log(this.state.resTekananDarah);
+        this.setState({resultExist : true});
+        // console.log("Call API");
+        // console.log(this.state.resDiabetes);
+        // console.log(this.state.resImt);
+        // console.log(this.state.resObesitas);
+        // console.log(this.state.resTekananDarah);
+
+        //--Sampah--
         // this.props.doTest.changeResultTestDiabetes(this.state.resDiabetes);
         // this.props.doTest.changeResultTestImt(this.state.resImt);
         // this.props.doTest.changeResultTestObesitas(this.state.resObesitas);
@@ -327,20 +432,20 @@ class FormTest extends React.Component{
                             <label>Jumlah Anggota Keluarga</label><br></br><br></br>
                         </div>
                         <div className="input">
-                            <input className="input_component" type="date" value={this.state.lahir} id="myDate" onChange={this.handleLahirChange}></input> <br></br>
-                            <input className="input_component" type="number" value={this.state.hamil} id="quantity_pregnancy" onChange={this.handleHamilChange} name="pregnancy" min="0" max="10"></input> <br></br>
-                            <input className="input_component" type="" value={this.state.glukosa} id="quantity_glucose" onChange={this.handleGlukosaChange} name="glucose" min="1" max=""></input><label className="input_component">mg/dL</label> <br></br>
-                            <Tippy content='Tekanan Sistol / Batas Atas Tekanan Darah'><input className="input_component join" type="number" value={this.state.sistol} id="quantity_sistol" onChange={this.handleSistolChange} name="sistol" min="1" max=""></input></Tippy>
+                            <input className="input_component" type="date" value={this.state.lahir} id="myDate" onChange={this.handleLahirChange} onClick={this.callAlert}></input> <br></br>
+                            <input className="input_component" type="number" value={this.state.hamil} id="quantity_pregnancy" onChange={this.handleHamilChange} onClick={this.callAlert} name="pregnancy" min="0" max="10"></input> <br></br>
+                            <input className="input_component" type="" value={this.state.glukosa} id="quantity_glucose" onChange={this.handleGlukosaChange} onClick={this.callAlert} name="glucose" min="1" max=""></input><label className="input_component">mg/dL</label> <br></br>
+                            <Tippy content='Tekanan Sistol / Batas Atas Tekanan Darah'><input className="input_component join" type="number" value={this.state.sistol} id="quantity_sistol" onChange={this.handleSistolChange} onClick={this.callAlert} name="sistol" min="1" max=""></input></Tippy>
                             <label className="icon">/</label>
-                            <Tippy content='Tekanan Diastol / Batas Bawah Tekanan Darah'><input className="input_component join" type="number" value={this.state.diastol} id="quantity_diastol" onChange={this.handleDiastolChange} name="diastol" min="1" max=""></input></Tippy><label className="input_component tipi">mmHg</label><br></br>
+                            <Tippy content='Tekanan Diastol / Batas Bawah Tekanan Darah'><input className="input_component join" type="number" value={this.state.diastol} id="quantity_diastol" onChange={this.handleDiastolChange} onClick={this.callAlert} name="diastol" min="1" max=""></input></Tippy><label className="input_component tipi">mmHg</label><br></br>
                             {/* <Tippy content='Batas Atas Tekanan Darah'><input className="input_component" type="number" value={this.state.sistol} id="quantity_sistol" onChange={this.handleSistolChange} name="sistol" min="1" max="5"></input></Tippy><label className="input_component">mmHg</label><br></br>
                             <Tippy content='Batas Bawah Tekanan Darah'><input className="input_component" type="number" value={this.state.diastol} id="quantity_diastol" onChange={this.handleDiastolChange} name="diastol" min="1" max="5"></input></Tippy><label className="input_component">mmHg</label><br></br> */}
-                            <input className="input_component" type="" value={this.state.kulit} id="quantity_skin_thickness" onChange={this.handleKulitChange} name="skin_thickness" min="1" max=""></input> <br></br>
-                            <input className="input_component" type="" value={this.state.insulin} id="quantity_cpeptida" onChange={this.handleInsulinChange} name="cpeptida" min="1" max=""></input><label className="input_component">ng/mL</label><br></br>
-                            <input className="input_component" type="" value={this.state.berat} id="quantity_weight" onChange={this.handleBeratChange} name="weight" min="1" max=""></input><label className="input_component">Kg</label><br></br>
-                            <input className="input_component" type="" value={this.state.tinggi} id="quantity_height" onChange={this.handleTinggiChange} name="height" min="1" max=""></input><label className="input_component">Cm</label><br></br>
-                            <input className="input_component" type="number" value={this.state.keluargaD} id="quantity_family_diabetes" onChange={this.handleKeluargaDChange} name="family_diabetes" min="1" max=""></input><label className="input_component">Orang</label><br></br>
-                            <input className="input_component" type="number" value={this.state.keluarga} id="quantity_family" name="family" onChange={this.handleKeluargaChange} min="1" max=""></input><label className="input_component">Orang</label>
+                            <input className="input_component" type="" value={this.state.kulit} id="quantity_skin_thickness" onChange={this.handleKulitChange} onClick={this.callAlert} name="skin_thickness" min="1" max=""></input> <br></br>
+                            <input className="input_component" type="" value={this.state.insulin} id="quantity_cpeptida" onChange={this.handleInsulinChange} onClick={this.callAlert} name="cpeptida" min="1" max=""></input><label className="input_component">ng/mL</label><br></br>
+                            <input className="input_component" type="" value={this.state.berat} id="quantity_weight" onChange={this.handleBeratChange} onClick={this.callAlert} name="weight" min="1" max=""></input><label className="input_component">Kg</label><br></br>
+                            <input className="input_component" type="" value={this.state.tinggi} id="quantity_height" onChange={this.handleTinggiChange} onClick={this.callAlert} name="height" min="1" max=""></input><label className="input_component">Cm</label><br></br>
+                            <input className="input_component" type="number" value={this.state.keluargaD} id="quantity_family_diabetes" onChange={this.handleKeluargaDChange} onClick={this.callAlert} name="family_diabetes" min="1" max=""></input><label className="input_component">Orang</label><br></br>
+                            <input className="input_component" type="number" value={this.state.keluarga} id="quantity_family" name="family" onChange={this.handleKeluargaChange} onClick={this.callAlert} min="1" max=""></input><label className="input_component">Orang</label>
                             <button className="button_proses" id="prediksi" onClick={this.go_predict_klik} onMouseOver={this.go_predict_hover}>Proses</button>
                         </div>
                     </div>
