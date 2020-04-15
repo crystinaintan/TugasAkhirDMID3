@@ -148,10 +148,14 @@ class FormTest extends React.Component{
         .then(res =>  res.json())
         .then(res => { 
             //console.log(res)
-            this.setState({resDiabetes : res[0].hasil.diabetes, 
-                           resImt : res[0].hasil.imt,
-                           resObesitas : res[0].hasil.obesitas,
-                           resTekananDarah : res[0].hasil.tekananDarah})
+            // this.setState({resDiabetes : res[0].hasil.diabetes, 
+            //                resImt : res[0].hasil.imt,
+            //                resObesitas : res[0].hasil.obesitas,
+            //                resTekananDarah : res[0].hasil.tekananDarah})
+              this.setState({resDiabetes : res.diabetes, 
+                               resImt : res.imt,
+                               resObesitas : res.obesitas,
+                               resTekananDarah : res.tekananDarah})
               this.props.doTest.changeResultTestDiabetes(this.state.resDiabetes)
               this.props.doTest.changeResultTestImt(this.state.resImt)
               this.props.doTest.changeResultTestObesitas(this.state.resObesitas)
