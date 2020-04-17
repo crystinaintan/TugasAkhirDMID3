@@ -27,7 +27,9 @@ class FormTest extends React.Component{
             resImt:'Berhasil',
             resObesitas:'Berhasil',
             resTekananDarah:'Berhasil',
-            resultExist : false
+
+            resultExist : false,
+            statusInput : true
         }
 
     }
@@ -44,7 +46,50 @@ class FormTest extends React.Component{
         this.setState({
             hamil : event.target.value
         })
-        document.getElementById("quantity_pregnancy").style.borderColor = "";
+        document.getElementById("quantity_sistol").style.borderColor = "";
+
+        var val = document.getElementById("quantity_pregnancy").value;
+        console.log("Value dari Input : ", val);
+        var status = this.isNumeric(val);
+        console.log("TEST ISNUMERIC : ", status);
+        
+        var length_input = (val+"").length;
+        console.log(length_input);
+        console.log("INI STATUS STATUS INPUT SEBELUM PANGGIL onlyNumberTest : ",this.state.statusInput);
+        this.setState({
+            statusInput :  status
+        });
+        console.log("INI STATUS STATUS INPUT SETELAH PANGGIL onlyNumberTest : ",this.state.statusInput);
+
+        var l = localStorage.getItem('statusInput');
+        console.log("Ini Value dari Local Storage : ", l);
+            if(status){
+                
+                console.log("STATE INPUT TRUE");
+                console.log((val+"").charAt(length_input-1) == '.');
+                if((val+"").charAt(length_input-1) === '.')
+                {
+                    this.setState({
+                        hamil : JSON.parse(localStorage.getItem('duhamil'))
+                    })
+                }
+                else
+                {
+                    document.getElementById("quantity_pregnancy").style.borderColor = "";
+                    this.setState({
+                        hamil : event.target.value
+                    }) 
+                }
+            }
+            else if(!status){
+                console.log("STATE INPUT FALSE");
+                if(length_input>0)
+                {
+                    this.setState({
+                        hamil : JSON.parse(localStorage.getItem('duhamil'))
+                    })
+                }
+            }
     }
 
     handleGlukosaChange = event => {
@@ -52,6 +97,37 @@ class FormTest extends React.Component{
             glukosa : event.target.value
         })
         document.getElementById("quantity_glucose").style.borderColor = "";
+        
+        var val = document.getElementById("quantity_glucose").value;
+        console.log("Value dari Input : ", val);
+        var status = this.isNumeric(val);
+        console.log("TEST ISNUMERIC : ", status);
+        console.log("INI STATUS STATUS INPUT SEBELUM PANGGIL onlyNumberTest : ",this.state.statusInput);
+        this.setState({
+            statusInput :  status
+        });
+        console.log("INI STATUS STATUS INPUT SETELAH PANGGIL onlyNumberTest : ",this.state.statusInput);
+
+        var l = localStorage.getItem('statusInput');
+        console.log("Ini Value dari Local Storage : ", l);
+            if(status){
+                console.log("STATE INPUT TRUE");
+                document.getElementById("quantity_glucose").style.borderColor = "";
+                this.setState({
+                    glukosa : event.target.value
+                })  
+            }
+            else if(!status){
+                console.log("STATE INPUT FALSE");
+                var length_input = (val+"").length;
+                console.log(length_input);
+                if(length_input>0)
+                {
+                    this.setState({
+                        glukosa : JSON.parse(localStorage.getItem('duglukosa'))
+                    })
+                }
+            }
     }
 
     handleSistolChange = event => {
@@ -59,6 +135,37 @@ class FormTest extends React.Component{
             sistol : event.target.value
         })
         document.getElementById("quantity_sistol").style.borderColor = "";
+        
+        var val = document.getElementById("quantity_sistol").value;
+        console.log("Value dari Input : ", val);
+        var status = this.isNumeric(val);
+        console.log("TEST ISNUMERIC : ", status);
+        console.log("INI STATUS STATUS INPUT SEBELUM PANGGIL onlyNumberTest : ",this.state.statusInput);
+        this.setState({
+            statusInput :  status
+        });
+        console.log("INI STATUS STATUS INPUT SETELAH PANGGIL onlyNumberTest : ",this.state.statusInput);
+
+        var l = localStorage.getItem('statusInput');
+        console.log("Ini Value dari Local Storage : ", l);
+            if(status){
+                console.log("STATE INPUT TRUE");
+                document.getElementById("quantity_sistol").style.borderColor = "";
+                this.setState({
+                    sistol : event.target.value
+                })  
+            }
+            else if(!status){
+                console.log("STATE INPUT FALSE");
+                var length_input = (val+"").length;
+                console.log(length_input);
+                if(length_input>0)
+                {
+                    this.setState({
+                        sistol : JSON.parse(localStorage.getItem('dusistol'))
+                    })
+                }
+            }
     }
 
     handleDiastolChange = event => {
@@ -66,6 +173,37 @@ class FormTest extends React.Component{
             diastol : event.target.value
         })
         document.getElementById("quantity_diastol").style.borderColor = "";
+
+        var val = document.getElementById("quantity_diastol").value;
+        console.log("Value dari Input : ", val);
+        var status = this.isNumeric(val);
+        console.log("TEST ISNUMERIC : ", status);
+        console.log("INI STATUS STATUS INPUT SEBELUM PANGGIL onlyNumberTest : ",this.state.statusInput);
+        this.setState({
+            statusInput :  status
+        });
+        console.log("INI STATUS STATUS INPUT SETELAH PANGGIL onlyNumberTest : ",this.state.statusInput);
+
+        var l = localStorage.getItem('statusInput');
+        console.log("Ini Value dari Local Storage : ", l);
+            if(status){
+                console.log("STATE INPUT TRUE");
+                document.getElementById("quantity_diastol").style.borderColor = "";
+                this.setState({
+                    diastol : event.target.value
+                })  
+            }
+            else if(!status){
+                console.log("STATE INPUT FALSE");
+                var length_input = (val+"").length;
+                console.log(length_input);
+                if(length_input>0)
+                {
+                    this.setState({
+                        diastol : JSON.parse(localStorage.getItem('dudiastol'))
+                    })
+                }
+            }
     }
 
     handleKulitChange = event => {
@@ -73,6 +211,37 @@ class FormTest extends React.Component{
             kulit : event.target.value
         })
         document.getElementById("quantity_skin_thickness").style.borderColor = "";
+
+        var val = document.getElementById("quantity_skin_thickness").value;
+        console.log("Value dari Input : ", val);
+        var status = this.isNumeric(val);
+        console.log("TEST ISNUMERIC : ", status);
+        console.log("INI STATUS STATUS INPUT SEBELUM PANGGIL onlyNumberTest : ",this.state.statusInput);
+        this.setState({
+            statusInput :  status
+        });
+        console.log("INI STATUS STATUS INPUT SETELAH PANGGIL onlyNumberTest : ",this.state.statusInput);
+
+        var l = localStorage.getItem('statusInput');
+        console.log("Ini Value dari Local Storage : ", l);
+            if(status){
+                console.log("STATE INPUT TRUE");
+                document.getElementById("quantity_skin_thickness").style.borderColor = "";
+                this.setState({
+                    kulit : event.target.value
+                })  
+            }
+            else if(!status){
+                console.log("STATE INPUT FALSE");
+                var length_input = (val+"").length;
+                console.log(length_input);
+                if(length_input>0)
+                {
+                    this.setState({
+                        kulit : JSON.parse(localStorage.getItem('dukulit'))
+                    })
+                }
+            }
     }
 
     handleInsulinChange = event => {
@@ -80,6 +249,37 @@ class FormTest extends React.Component{
             insulin : event.target.value
         })
         document.getElementById("quantity_cpeptida").style.borderColor = "";
+
+        var val = document.getElementById("quantity_cpeptida").value;
+        console.log("Value dari Input : ", val);
+        var status = this.isNumeric(val);
+        console.log("TEST ISNUMERIC : ", status);
+        console.log("INI STATUS STATUS INPUT SEBELUM PANGGIL onlyNumberTest : ",this.state.statusInput);
+        this.setState({
+            statusInput :  status
+        });
+        console.log("INI STATUS STATUS INPUT SETELAH PANGGIL onlyNumberTest : ",this.state.statusInput);
+
+        var l = localStorage.getItem('statusInput');
+        console.log("Ini Value dari Local Storage : ", l);
+            if(status){
+                console.log("STATE INPUT TRUE");
+                document.getElementById("quantity_cpeptida").style.borderColor = "";
+                this.setState({
+                    insulin : event.target.value
+                })  
+            }
+            else if(!status){
+                console.log("STATE INPUT FALSE");
+                var length_input = (val+"").length;
+                console.log(length_input);
+                if(length_input>0)
+                {
+                    this.setState({
+                        insulin : JSON.parse(localStorage.getItem('duinsulin'))
+                    })
+                }
+            }
     }
 
     handleBeratChange = event => {
@@ -87,6 +287,37 @@ class FormTest extends React.Component{
             berat : event.target.value
         })
         document.getElementById("quantity_weight").style.borderColor = "";
+
+        var val = document.getElementById("quantity_weight").value;
+        console.log("Value dari Input : ", val);
+        var status = this.isNumeric(val);
+        console.log("TEST ISNUMERIC : ", status);
+        console.log("INI STATUS STATUS INPUT SEBELUM PANGGIL onlyNumberTest : ",this.state.statusInput);
+        this.setState({
+            statusInput :  status
+        });
+        console.log("INI STATUS STATUS INPUT SETELAH PANGGIL onlyNumberTest : ",this.state.statusInput);
+
+        var l = localStorage.getItem('statusInput');
+        console.log("Ini Value dari Local Storage : ", l);
+            if(status){
+                console.log("STATE INPUT TRUE");
+                document.getElementById("quantity_weight").style.borderColor = "";
+                this.setState({
+                    berat : event.target.value
+                })  
+            }
+            else if(!status){
+                console.log("STATE INPUT FALSE");
+                var length_input = (val+"").length;
+                console.log(length_input);
+                if(length_input>0)
+                {
+                    this.setState({
+                        berat : JSON.parse(localStorage.getItem('duberat'))
+                    })
+                }
+            }
     }
 
     handleTinggiChange = event => {
@@ -94,6 +325,37 @@ class FormTest extends React.Component{
             tinggi : event.target.value
         })
         document.getElementById("quantity_height").style.borderColor = "";
+
+        var val = document.getElementById("quantity_height").value;
+        console.log("Value dari Input : ", val);
+        var status = this.isNumeric(val);
+        console.log("TEST ISNUMERIC : ", status);
+        console.log("INI STATUS STATUS INPUT SEBELUM PANGGIL onlyNumberTest : ",this.state.statusInput);
+        this.setState({
+            statusInput :  status
+        });
+        console.log("INI STATUS STATUS INPUT SETELAH PANGGIL onlyNumberTest : ",this.state.statusInput);
+
+        var l = localStorage.getItem('statusInput');
+        console.log("Ini Value dari Local Storage : ", l);
+            if(status){
+                console.log("STATE INPUT TRUE");
+                document.getElementById("quantity_height").style.borderColor = "";
+                this.setState({
+                    tinggi : event.target.value
+                })  
+            }
+            else if(!status){
+                console.log("STATE INPUT FALSE");
+                var length_input = (val+"").length;
+                console.log(length_input);
+                if(length_input>0)
+                {
+                    this.setState({
+                        tinggi : JSON.parse(localStorage.getItem('dutinggi'))
+                    })
+                }
+            }
     }
 
     handleKeluargaDChange = event => {
@@ -101,6 +363,37 @@ class FormTest extends React.Component{
             keluargaD : event.target.value
         })
         document.getElementById("quantity_family_diabetes").style.borderColor = "";
+
+        var val = document.getElementById("quantity_family_diabetes").value;
+        console.log("Value dari Input : ", val);
+        var status = this.isNumeric(val);
+        console.log("TEST ISNUMERIC : ", status);
+        console.log("INI STATUS STATUS INPUT SEBELUM PANGGIL onlyNumberTest : ",this.state.statusInput);
+        this.setState({
+            statusInput :  status
+        });
+        console.log("INI STATUS STATUS INPUT SETELAH PANGGIL onlyNumberTest : ",this.state.statusInput);
+
+        var l = localStorage.getItem('statusInput');
+        console.log("Ini Value dari Local Storage : ", l);
+            if(status){
+                console.log("STATE INPUT TRUE");
+                document.getElementById("quantity_family_diabetes").style.borderColor = "";
+                this.setState({
+                    keluargaD : event.target.value
+                })  
+            }
+            else if(!status){
+                console.log("STATE INPUT FALSE");
+                var length_input = (val+"").length;
+                console.log(length_input);
+                if(length_input>0)
+                {
+                    this.setState({
+                        keluargaD : JSON.parse(localStorage.getItem('dukeluargaD'))
+                    })
+                }
+            }
     }
 
     handleKeluargaChange = event => {
@@ -108,8 +401,37 @@ class FormTest extends React.Component{
             keluarga : event.target.value
         })
         document.getElementById("quantity_family").style.borderColor = "";
-        // console.log(event.target.value);
-        console.log("state keluarga : ", this.state.keluarga);
+        
+        var val = document.getElementById("quantity_family").value;
+        console.log("Value dari Input : ", val);
+        var status = this.isNumeric(val);
+        console.log("TEST ISNUMERIC : ", status);
+        console.log("INI STATUS STATUS INPUT SEBELUM PANGGIL onlyNumberTest : ",this.state.statusInput);
+        this.setState({
+            statusInput :  status
+        });
+        console.log("INI STATUS STATUS INPUT SETELAH PANGGIL onlyNumberTest : ",this.state.statusInput);
+
+        var l = localStorage.getItem('statusInput');
+        console.log("Ini Value dari Local Storage : ", l);
+            if(status){
+                console.log("STATE INPUT TRUE");
+                document.getElementById("quantity_family").style.borderColor = "";
+                this.setState({
+                    keluarga : event.target.value
+                })  
+            }
+            else if(!status){
+                console.log("STATE INPUT FALSE");
+                var length_input = (val+"").length;
+                console.log(length_input);
+                if(length_input>0)
+                {
+                    this.setState({
+                        keluarga : JSON.parse(localStorage.getItem('dukeluarga'))
+                    })
+                }
+            }
     }
     
     /*
@@ -223,7 +545,8 @@ class FormTest extends React.Component{
                 resDiabetes: JSON.parse(resDb),
                 resImt: JSON.parse(resImt),
                 resObesitas: JSON.parse(resOb),
-                resTekananDarah: JSON.parse(resTD)
+                resTekananDarah: JSON.parse(resTD),
+                statusInput: JSON.parse(localStorage.getItem('statusInput'))
             } 
         );
         this.props.doTest.changeResultTestDiabetes(resDb);
@@ -253,6 +576,7 @@ class FormTest extends React.Component{
         localStorage.setItem('resImt', JSON.stringify(nextState.resImt));
         localStorage.setItem('resObesitas', JSON.stringify(nextState.resObesitas));
         localStorage.setItem('resTekananDarah', JSON.stringify(nextState.resTekananDarah));
+        localStorage.setItem('statusInput', JSON.stringify(nextState.statusInput));
    }
 
     alertReInputDataUser = () => {
@@ -277,7 +601,10 @@ class FormTest extends React.Component{
     }
 
     componentWillMount = () =>{
-        this.callBackDataUser();
+        if(this.state.statusInput == true)
+        {
+            this.callBackDataUser()
+        }
         console.log("Component FORM WILL AMOUNT");
     }
 
@@ -329,6 +656,41 @@ class FormTest extends React.Component{
     //       console.log(this.state);
     //     }
     // }
+
+    onlyNumberTest = (event) => {
+        var charCode = (event.which) ? event.which : event.keyCode;
+        var status = true;
+        console.log("Nilai Charcode : ", charCode);
+        if (charCode != 46 && charCode > 31  && (charCode < 48 || charCode > 57))
+        {
+            //window.alert("Masukan HARUS berupa angka!");
+            status= false;
+            this.setState({
+                statusInput :  status
+            })
+            console.log("MASUK KE charcode");
+            console.log("Dengan status : ", this.state.statusInput);
+        }
+        else if(isNaN(event.target.value))
+        {
+            status= false;
+            this.setState({
+                statusInput :  status
+            })
+            console.log("MASUK KE ISNAN");
+            console.log("Dengan status : ", this.state.statusInput);
+        }
+        
+        return status;
+    }
+
+    isNumeric = (n) => {
+        var status = !isNaN(parseFloat(n)) && isFinite(n);
+        this.setState({
+            statusInput :  status
+        });
+        return status;
+    }
 
     go_predict_klik = ()=> {
         var x = document.getElementById("hasil");
@@ -445,19 +807,19 @@ class FormTest extends React.Component{
                         </div>
                         <div className="input">
                             <input className="input_component" type="date" value={this.state.lahir} id="myDate" onChange={this.handleLahirChange} onClick={this.callAlert}></input> <br></br>
-                            <input className="input_component" type="number" value={this.state.hamil} id="quantity_pregnancy" onChange={this.handleHamilChange} onClick={this.callAlert} name="pregnancy" min="0" max="10"></input> <br></br>
+                            <input className="input_component" type="" value={this.state.hamil} id="quantity_pregnancy" onChange={this.handleHamilChange} onClick={this.callAlert} name="pregnancy" min="0" max="10"></input> <br></br>
                             <input className="input_component" type="" value={this.state.glukosa} id="quantity_glucose" onChange={this.handleGlukosaChange} onClick={this.callAlert} name="glucose" min="1" max=""></input><label className="input_component">mg/dL</label> <br></br>
-                            <Tippy content='Tekanan Sistol / Batas Atas Tekanan Darah'><input className="input_component join" type="number" value={this.state.sistol} id="quantity_sistol" onChange={this.handleSistolChange} onClick={this.callAlert} name="sistol" min="1" max=""></input></Tippy>
+                            <Tippy content='Tekanan Sistol / Batas Atas Tekanan Darah'><input className="input_component join" type="" value={this.state.sistol} id="quantity_sistol" onChange={this.handleSistolChange} onClick={this.callAlert} name="sistol" min="1" max=""></input></Tippy>
                             <label className="icon">/</label>
-                            <Tippy content='Tekanan Diastol / Batas Bawah Tekanan Darah'><input className="input_component join" type="number" value={this.state.diastol} id="quantity_diastol" onChange={this.handleDiastolChange} onClick={this.callAlert} name="diastol" min="1" max=""></input></Tippy><label className="input_component tipi">mmHg</label><br></br>
+                            <Tippy content='Tekanan Diastol / Batas Bawah Tekanan Darah'><input className="input_component join" type="" value={this.state.diastol} id="quantity_diastol" onChange={this.handleDiastolChange} onClick={this.callAlert} name="diastol" min="1" max=""></input></Tippy><label className="input_component tipi">mmHg</label><br></br>
                             {/* <Tippy content='Batas Atas Tekanan Darah'><input className="input_component" type="number" value={this.state.sistol} id="quantity_sistol" onChange={this.handleSistolChange} name="sistol" min="1" max="5"></input></Tippy><label className="input_component">mmHg</label><br></br>
                             <Tippy content='Batas Bawah Tekanan Darah'><input className="input_component" type="number" value={this.state.diastol} id="quantity_diastol" onChange={this.handleDiastolChange} name="diastol" min="1" max="5"></input></Tippy><label className="input_component">mmHg</label><br></br> */}
                             <input className="input_component" type="" value={this.state.kulit} id="quantity_skin_thickness" onChange={this.handleKulitChange} onClick={this.callAlert} name="skin_thickness" min="1" max=""></input> <br></br>
                             <input className="input_component" type="" value={this.state.insulin} id="quantity_cpeptida" onChange={this.handleInsulinChange} onClick={this.callAlert} name="cpeptida" min="1" max=""></input><label className="input_component">ng/mL</label><br></br>
                             <input className="input_component" type="" value={this.state.berat} id="quantity_weight" onChange={this.handleBeratChange} onClick={this.callAlert} name="weight" min="1" max=""></input><label className="input_component">Kg</label><br></br>
                             <input className="input_component" type="" value={this.state.tinggi} id="quantity_height" onChange={this.handleTinggiChange} onClick={this.callAlert} name="height" min="1" max=""></input><label className="input_component">Cm</label><br></br>
-                            <input className="input_component" type="number" value={this.state.keluargaD} id="quantity_family_diabetes" onChange={this.handleKeluargaDChange} onClick={this.callAlert} name="family_diabetes" min="1" max=""></input><label className="input_component">Orang</label><br></br>
-                            <input className="input_component" type="number" value={this.state.keluarga} id="quantity_family" name="family" onChange={this.handleKeluargaChange} onClick={this.callAlert} min="1" max=""></input><label className="input_component">Orang</label>
+                            <input className="input_component" type="" value={this.state.keluargaD} id="quantity_family_diabetes" onChange={this.handleKeluargaDChange} onClick={this.callAlert} name="family_diabetes" min="1" max=""></input><label className="input_component">Orang</label><br></br>
+                            <input className="input_component" type="" value={this.state.keluarga} id="quantity_family" name="family" onChange={this.handleKeluargaChange} onClick={this.callAlert} min="1" max=""></input><label className="input_component">Orang</label>
                             <button className="button_proses" id="prediksi" onClick={this.go_predict_klik} onMouseOver={this.go_predict_hover}>Proses</button>
                         </div>
                     </div>

@@ -123,15 +123,43 @@ router.post("/prediksi_diabetes", function(req, res, next){
             DiabetesPedigreeFunction: diabetesPedigree,                          
             Age: body.lahir
         });
+
+        var dataUser= 
+        { 
+            "lahir": body.userBD,
+            "hamil": body.hamil,
+            "glukosa": body.glukosa,
+            "sistol": body.sistol,
+            "diastol": body.diastol,
+            "kulit": body.kulit,
+            "insulin": body.insulin,
+            "berat": body.berat,
+            "tinggi": body.tinggi,
+            "keluargaD":  body.keluargaD,
+            "keluarga": body.keluarga
+        };
+
+        // var save_dataUser = JSON.stringify(dataUser);
+
+        // fs.writeFile('./userdata.json', save_dataUser , (err) => {  //Menyimpan model tree berupa json ke dalam file message.json
+        //     if (err) throw err;
+        //     console.log('The file has been saved!');
+        // });
+
         const hasil =  {
             "diabetes" : status_diabetes(predicted_class_a),
             "imt" : imt,
             "obesitas" : status_BMI(imt),
             "tekananDarah" : status_hipertensi(body.sistol, body.diastol)
         };
+
+        //const load_data_user = dataUser;
+        //const send_data = [{"hasil": hasil, "datauser" : load_data_user}];
         // console.log(hasil.result[0].imt);
         // console.log(req.body.hamil);
-        console.log(JSON.stringify(hasil));
+        //console.log(JSON.stringify(hasil));
+        //console.log("API HASIL SEND : ", send_data);
+        //console.log("save data user dalam file : ", save_dataUser);
         res.send(JSON.stringify(hasil)); 
         
     });
