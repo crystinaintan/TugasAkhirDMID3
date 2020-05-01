@@ -75,6 +75,10 @@ function status_diabetes(status){
     }
 } 
 
+function convertC_peptide(value){
+    return (value*0.333*1000)/6.9450
+}
+
 
 router.get("/", function(req, res, next) {
     res.send("API is working properly");
@@ -112,13 +116,16 @@ router.post("/prediksi_diabetes", function(req, res, next){
         console.log("Data Kiriman dari frontend : ", body.hamil);
         const imt = calculate_bmi(body.berat, body.tinggi);
         const diabetesPedigree = diabetesPedigreeFunction(body.keluargaD, body.keluarga);
+        const c_peptide = convertC_peptide(body.insulin);
+        // console.log("INSULIN HASIL LAB :",body.insulin);
+        // console.log("HASIL CONVERT INSULIN : ", c_peptide);
        
         var predicted_class_a = dt_a.predict({                          //memprediksi berdasarkan data baru, predicted_class_a (hasil prediksi data baru)
             Pregnancies: body.hamil,
             Glucose: body.glukosa,
             BloodPressure: body.diastol,//diastolic
             SkinThickness: body.kulit,
-            Insulin: body.insulin,
+            Insulin: c_peptide,
             BMI: imt,
             DiabetesPedigreeFunction: diabetesPedigree,                          
             Age: body.lahir
