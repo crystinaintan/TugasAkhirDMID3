@@ -23,10 +23,10 @@ class FormTest extends React.Component{
             keluarga:'',
             tahun : '',
 
-            resDiabetes :'Berhasil',
-            resImt:'Berhasil',
-            resObesitas:'Berhasil',
-            resTekananDarah:'Berhasil',
+            resDiabetes :'Loading...',
+            resImt:'Loading...',
+            resObesitas:'Loading...',
+            resTekananDarah:'Loading...',
 
             resultExist : false,
             statusInput : true
@@ -559,19 +559,35 @@ class FormTest extends React.Component{
         Method untuk set local storage untuk data input user
     **/
    setLocalStorageForDataUser = (nextProps, nextState) =>{  
-        localStorage.setItem('dulahir', JSON.stringify(nextState.lahir));
-        localStorage.setItem('duhamil', JSON.stringify(nextState.hamil));
-        localStorage.setItem('duglukosa', JSON.stringify(nextState.glukosa));
-        localStorage.setItem('dusistol', JSON.stringify(nextState.sistol));
-        localStorage.setItem('dudiastol', JSON.stringify(nextState.diastol));
-        localStorage.setItem('dukulit', JSON.stringify(nextState.kulit));
-        localStorage.setItem('duinsulin', JSON.stringify(nextState.insulin));
-        localStorage.setItem('duberat', JSON.stringify(nextState.berat));
-        localStorage.setItem('dutinggi', JSON.stringify(nextState.tinggi));
-        localStorage.setItem('dukeluargaD', JSON.stringify(nextState.keluargaD));
-        localStorage.setItem('dukeluarga', JSON.stringify(nextState.keluarga));
+        var kosong = "";
+        // if(nextState == null)
+        // {
+        //     localStorage.setItem('dulahir', JSON.stringify(kosong));
+        //     localStorage.setItem('duhamil', JSON.stringify(kosong));
+        //     localStorage.setItem('duglukosa', JSON.stringify(kosong));
+        //     localStorage.setItem('dusistol', JSON.stringify(kosong));
+        //     localStorage.setItem('dudiastol', JSON.stringify(kosong));
+        //     localStorage.setItem('dukulit', JSON.stringify(kosong));
+        //     localStorage.setItem('duinsulin', JSON.stringify(kosong));
+        //     localStorage.setItem('duberat', JSON.stringify(kosong));
+        //     localStorage.setItem('dutinggi', JSON.stringify(kosong));
+        //     localStorage.setItem('dukeluargaD', JSON.stringify(kosong));
+        //     localStorage.setItem('dukeluarga', JSON.stringify(kosong));
+        // }
+        // else{
+            localStorage.setItem('dulahir', JSON.stringify(nextState.lahir));
+            localStorage.setItem('duhamil', JSON.stringify(nextState.hamil));
+            localStorage.setItem('duglukosa', JSON.stringify(nextState.glukosa));
+            localStorage.setItem('dusistol', JSON.stringify(nextState.sistol));
+            localStorage.setItem('dudiastol', JSON.stringify(nextState.diastol));
+            localStorage.setItem('dukulit', JSON.stringify(nextState.kulit));
+            localStorage.setItem('duinsulin', JSON.stringify(nextState.insulin));
+            localStorage.setItem('duberat', JSON.stringify(nextState.berat));
+            localStorage.setItem('dutinggi', JSON.stringify(nextState.tinggi));
+            localStorage.setItem('dukeluargaD', JSON.stringify(nextState.keluargaD));
+            localStorage.setItem('dukeluarga', JSON.stringify(nextState.keluarga));
+        //}  
         localStorage.setItem('resultExist', JSON.stringify(nextState.resultExist));
-
         localStorage.setItem('resDiabetes', JSON.stringify(nextState.resDiabetes));
         localStorage.setItem('resImt', JSON.stringify(nextState.resImt));
         localStorage.setItem('resObesitas', JSON.stringify(nextState.resObesitas));
@@ -657,38 +673,38 @@ class FormTest extends React.Component{
     //     }
     // }
 
-    onlyNumberTest = (event) => {
-        var charCode = (event.which) ? event.which : event.keyCode;
-        var status = true;
-        console.log("Nilai Charcode : ", charCode);
-        if (charCode != 46 && charCode > 31  && (charCode < 48 || charCode > 57))
-        {
-            //window.alert("Masukan HARUS berupa angka!");
-            status= false;
-            this.setState({
-                statusInput :  status
-            })
-            console.log("MASUK KE charcode");
-            console.log("Dengan status : ", this.state.statusInput);
-        }
-        else if(isNaN(event.target.value))
-        {
-            status= false;
-            this.setState({
-                statusInput :  status
-            })
-            console.log("MASUK KE ISNAN");
-            console.log("Dengan status : ", this.state.statusInput);
-        }
+    // onlyNumberTest = (event) => {
+    //     var charCode = (event.which) ? event.which : event.keyCode;
+    //     var status = true;
+    //     console.log("Nilai Charcode : ", charCode);
+    //     if (charCode != 46 && charCode > 31  && (charCode < 48 || charCode > 57))
+    //     {
+    //         //window.alert("Masukan HARUS berupa angka!");
+    //         status= false;
+    //         this.setState({
+    //             statusInput :  status
+    //         })
+    //         console.log("MASUK KE charcode");
+    //         console.log("Dengan status : ", this.state.statusInput);
+    //     }
+    //     else if(isNaN(event.target.value))
+    //     {
+    //         status= false;
+    //         this.setState({
+    //             statusInput :  status
+    //         })
+    //         console.log("MASUK KE ISNAN");
+    //         console.log("Dengan status : ", this.state.statusInput);
+    //     }
         
-        return status;
-    }
+    //     return status;
+    // }
 
     isNumeric = (n) => {
         var status = !isNaN(parseFloat(n)) && isFinite(n);
         this.setState({
             statusInput :  status
-        });
+        }); 
         return status;
     }
 
@@ -730,10 +746,6 @@ class FormTest extends React.Component{
             document.getElementById("quantity_weight").style.borderColor = "red";
             
         }
-        //Untuk cek number
-        // if(Number(document.getElementById("quantity_weight")) == "NaN"){
-        //     alert("Isi dengan angka saja!");
-        // }
         if(this.state.sistol=='')
         {
             document.getElementById("quantity_sistol").style.borderColor = "red";

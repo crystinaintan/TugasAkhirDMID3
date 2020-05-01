@@ -11,10 +11,10 @@ class Middle extends React.Component{
         super(props)
         
         this.state = {
-            hasilCekFormDiabetes: 'gagal',
-            hasilCekFormImt:'gagal',
-            hasilCekFormObesitas:'gagal',
-            hasilCekFormTekananDarah:'gagal'
+            hasilCekFormDiabetes: 'Loading...',
+            hasilCekFormImt:'Loading...',
+            hasilCekFormObesitas:'Loading...',
+            hasilCekFormTekananDarah:'Loading...'
         }
     }
 

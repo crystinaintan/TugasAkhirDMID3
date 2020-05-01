@@ -70,7 +70,7 @@ class MenuBar extends React.Component {
                         >
                             <ListItem>
                                 <Link to="/test_diabetes_mellitus" exact>
-                                    <ListItemText id="" className="list_item" primaryText='Prediksi Diabetes' />
+                                    <ListItemText id="" className="list_item" primaryText='Deteksi Diabetes' />
                                 </Link>
                             </ListItem>
                             <ListItem>

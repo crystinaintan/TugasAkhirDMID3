@@ -21,18 +21,18 @@ class BmiObesitas extends React.Component{
                         <p className="itemList">Obesitas atau yang biasa dikenal degan sebutan kelebihan berat badan, 
                         merupakan faktor risiko utama untuk diabetes mellitus. 
                         Hal ini terjadi karena semakin tebal jaringan lemak, sel-sel semakin kebal juga terhadap insulin. Cara mengukur berat badan
-                        adalah dengan menggunakna rumus perhitungan BMI (<i>Body Mass Index</i>) atau IMT (Index Massa Tubug) sebagai berikut. 
+                        adalah dengan menggunakna rumus perhitungan BMI (<i>Body Mass Index</i>) atau IMT (Index Massa Tubuh) sebagai berikut. 
                         
                         <figure>
                             <img className="gambar_li" src={bmi} alt=""/>
-                            <figcaption>Rumus mengukur BMI</figcaption>
+                            <figcaption>Rumus mengukur BMI atau IMT</figcaption>
                         </figure>
                         Arti dari hasil perhitungan BMI dapat dilihat sebagai berikut:
                         <ol>  
-                            <li>BMI di bawah 18,5 = Berat badan kurang</li>
-                            <li>BMI 18,5 – 22,9 = Berat badan normal</li>
-                            <li>BMI 23 – 29,9 = Berat badan berlebih (kecenderungan obesitas)</li>
-                            <li>BMI 30 ke atas = obesitas</li>
+                            <li>BMI atau IMT di bawah 18,5 = Berat badan kurang</li>
+                            <li>BMI atau IMT 18,5 – 22,9 = Berat badan normal</li>
+                            <li>BMI atau IMT 23 – 29,9 = Berat badan berlebih (kecenderungan obesitas)</li>
+                            <li>BMI atau IMT 30 ke atas = obesitas</li>
                         </ol>
                         Pada tubuh manusia, lemak akan terlebih dahulu disimpan ke lapisan <i>subkutan</i> 
                         (bagian bawah kulit/ kulit lemak/ jaringan ikat) seperti gambar berikut.

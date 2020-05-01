@@ -7,10 +7,10 @@ class Result extends React.Component{
         super(props)
         
         this.state = {
-            hasilDiabetes: 'Selamat! Anda Tidak terkena diabetes Mellitus.',
-            hasilImt:'28.1',
-            hasilObesitas:'Berat badan anda berlebihan (cenderung obesitas)',
-            hasilTekananDarah:'Anda mengalami Hipotensi (tekanan darah rendah).',
+            hasilDiabetes: 'Loading...',
+            hasilImt:'Loading...',
+            hasilObesitas:'Loading...',
+            hasilTekananDarah:'Loading...',
 
             penampung_hasilDiabetes :''
         }
@@ -134,7 +134,7 @@ class Result extends React.Component{
                     <p className="hasil_prediksi" id="hasil_imt"><a>IMT (Index Masa Tubuh): <br></br>{this.props.data.hasilCekFormImt} </a></p>
                     <p className="hasil_prediksi" id="hasil_obesitas"><a>Status Obesitas: <br></br>{this.props.data.hasilCekFormObesitas} </a></p>
                     <p className="hasil_prediksi" id="hasil_tekanan_darah"><a>Status Tekanan Darah: <br></br>{this.props.data.hasilCekFormTekananDarah} </a></p>
-                    <button className="button_ulang" onClick={this.back_predict}>Mulai Ulang</button>
+                    {/* <button className="button_ulang" onClick={this.back_predict}>Mulai Ulang</button> */}
             </div>
         );
     }
