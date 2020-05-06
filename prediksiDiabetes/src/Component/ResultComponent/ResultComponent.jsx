@@ -1,5 +1,6 @@
 import React from 'react';
 import './ResultComponent.css';
+import { Link } from 'react-router-dom';
 // import FormTest from '../FormTest/FormTest';
 
 class Result extends React.Component{
@@ -129,12 +130,13 @@ class Result extends React.Component{
         console.log("Ini value atribut given from middle : ", this.props.data.hasilCekFormDiabetes);
         return(
             <div className="result" id="hasil">
-                    <h2>Hasil Prediksi</h2>
+                    <h2>Hasil Deteksi</h2>
                     <p className="hasil_prediksi" id="hasil_diabetes"><a>Status Diabetes: <br></br>{this.props.data.hasilCekFormDiabetes} </a></p>
                     <p className="hasil_prediksi" id="hasil_imt"><a>IMT (Index Masa Tubuh): <br></br>{this.props.data.hasilCekFormImt} </a></p>
                     <p className="hasil_prediksi" id="hasil_obesitas"><a>Status Obesitas: <br></br>{this.props.data.hasilCekFormObesitas} </a></p>
                     <p className="hasil_prediksi" id="hasil_tekanan_darah"><a>Status Tekanan Darah: <br></br>{this.props.data.hasilCekFormTekananDarah} </a></p>
-                    {/* <button className="button_ulang" onClick={this.back_predict}>Mulai Ulang</button> */}
+                    <p id="warning">** HUBUNGI DOKTER UNTUK HASIL yang LEBIH AKURAT **</p><br></br>
+                    <p id="warning">!!Klik <Link to="/definisi_diabetes_mellitus">disini</Link> Untuk Membaca Lebih Banyak!!</p>
             </div>
         );
     }

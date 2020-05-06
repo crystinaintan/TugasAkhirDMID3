@@ -18,25 +18,6 @@ class MenuBar extends React.Component {
         }
     }
 
-    // hover_list_item = () =>{
-    //     document.getElementById("list_item").className = "hover";
-    //     console.log(this.state.selectedIndex);
-    // }
-
-    // hover_out_list_item = () =>{
-    //     document.getElementById("list_item").className = "nothover";
-    // }
-
-    // hover_list_item = () =>{
-    //     document.getElementById("list_item").className = "hover";
-    //     console.log(this.state.selectedIndex);
-    // }
-
-    // hover_out_list_item = () =>{
-    //     document.getElementById("list_item").className = "nothover";
-    // }
-
-    //index masih belum keupdate ketika select menu
     handleClick = index => {
         const selectedItem = this.state.selectedIndex[index];
         this.setState({ selectedIndex: selectedItem });
@@ -46,21 +27,12 @@ class MenuBar extends React.Component {
     updateState = event => {
         this.setState({ selectedIndex: event.target.value, itemSelected: true });
         console.log(event.target.value);
-        // eventually I want to render a DIV with data from the selected value
     }
 
     render() {
         return (
             <div className="menu">
-                {/* <a href="#">Prediksi Diabetes</a>
-                <a href="#">Diabetes</a>
-                <a href="#">Diabetes Melitus</a>
-                <a href="#">BMI & Obesitas</a> */}
                 <Drawer className="drawer">
-                    {/* <DrawerHeader>
-                    <DrawerTitle></DrawerTitle>
-                </DrawerHeader> */}
-
                     <DrawerContent className= "drawercontent">
                         <List
                             singleSelection
@@ -80,7 +52,7 @@ class MenuBar extends React.Component {
                             </ListItem>
                             <ListItem>
                                 <Link to="/definisi_diabetes_mellitus">
-                                    <ListItemText id="" className="list_item" primaryText='Diabetes Melitus' />
+                                    <ListItemText id="" className="list_item" primaryText='Diabetes Mellitus' />
                                 </Link>
                             </ListItem>
                             <ListItem>

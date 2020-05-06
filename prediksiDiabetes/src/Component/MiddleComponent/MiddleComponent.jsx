@@ -51,10 +51,6 @@ class Middle extends React.Component{
         return(
             <div className="main_page">
                 <img className="wallpaper" src={diabetes} alt=""/>
-                {/* <Router>
-                    <Fragment>
-                        <Switch>
-                            <Route exact path="/test_diabetes_mellitus/lakukan_test_diabetes_mellitus"> */}
                                 <FormTest doTest = {
                                     {
                                         hasilCekFormDiabetes : this.state.hasilCekFormDiabetes,
@@ -69,14 +65,6 @@ class Middle extends React.Component{
                                     hasilCekFormImt: this.state.hasilCekFormImt,
                                     hasilCekFormObesitas: this.state.hasilCekFormObesitas,
                                     hasilCekFormTekananDarah: this.state.hasilCekFormTekananDarah}}/>
-                            {/* </Route>
-                            <Route exact path="/test_diabetes_mellitus/definisi_Diabetes">
-                                <DiabetesDefinition/>
-                            </Route>
-                        </Switch>
-                    </Fragment>
-                </Router> */}
-                
             </div>
         );
     }

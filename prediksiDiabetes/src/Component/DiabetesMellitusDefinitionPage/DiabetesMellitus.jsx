@@ -3,6 +3,10 @@ import './DiabetesMellitus.css';
 import diabetes from '../../Photo/diabetes.jpg';
 import dm from '../../Photo/DM.jpg';
 import { Link } from 'react-router-dom';
+// import Checkbox from '@material/react-checkbox';
+// import "@material/react-checkbox/dist/checkbox.css";
+import '@material/mwc-checkbox';
+import '@material/mwc-formfield';
 
 class DiabetesMellitus extends React.Component{
     componentDidMount(){
@@ -26,24 +30,58 @@ class DiabetesMellitus extends React.Component{
                         Respons sel tubuh yang tidak wajar ini mengakibatkan insulin tidak bekerja sesuai fungsinya. 
                         Akibatnya, banyak glukosa yang tidak terserap oleh sel tubuh dan mengalir bebas dalam pembuluh darah dalam jumlah banyak. 
                     </p>
+                    <br></br>
                     <p className="itemList">
-                    Gejala diabetes mellitus dapat dijabarkan sebagai berikut : 
-                    
-                    <ol>
-                        <li>Calon penderita sering merasa kehausan</li>
-                        <li>Calon penderita cepat merasa lapar</li>
-                        <li>Calon penderita mengalami buang air kecil yang sering, khususnya pada malam hari</li>
-                        <li>Calon penderita mengalami luka yang lambat pulih</li>
-                        <li>Calon penderita mempunyai Berat badan menurun secara drastis tanpa sebab yang jelas</li>
-                        <li>Calon penderita merasa lemas, lesu, dan tidak bertenaga</li>
-                        <li>Calon penderita mempunyai pandangan yang buram</li>
-                        <li>Calon penderita mengalami rasa sakit atau mati rasa pada kaki dan tangan</li>
-                        <li>Calon penderita mudah terkena infeksi, entah itu di kulit, gusi dan mulut, atau di area genital</li>
-                        <li>Calon penderita merasakan gatal di area selangkangan atau area genital</li>
-                        <li>Calon penderita mengalami kulit yang menghitam, terutama di bagian lipatan ketiak. leher, dan selangkangan</li>
-                    </ol>
-                    </p>
+                    Gejala diabetes mellitus dapat ditandai dengan adanya peradangan tersamar. Berikut adalah beberapa indikator dalam pengecekan peradangan tersamar.
+                    Silakan tandai beberapa gejala yang anda alami : <br></br>
+                    <mwc-formfield label="Memiliki berat badan berlebih (mengalami kegemukan)">
+                        <mwc-checkbox class="child"></mwc-checkbox>
+                    </mwc-formfield>
+                    <mwc-formfield label="Selalu merasa butuh asupan karbohidrat)">
+                        <mwc-checkbox class="child"></mwc-checkbox>
+                    </mwc-formfield>
+                    <mwc-formfield label="Selalu merasa lapar">
+                        <mwc-checkbox class="child"></mwc-checkbox>
+                    </mwc-formfield>
+                    <mwc-formfield label="Selalu kelelahan (terutama setelah berolahraga)">
+                        <mwc-checkbox class="child"></mwc-checkbox>
+                    </mwc-formfield>
+                    <mwc-formfield label="Memiliki kuku yang ringkih/getas/lemah/rapuh/tidak kokoh">
+                        <mwc-checkbox class="child"></mwc-checkbox>
+                    </mwc-formfield>
+                    <mwc-formfield label="Memiliki rambut yang lepek/getas/rapuh">
+                        <mwc-checkbox class="child"></mwc-checkbox>
+                    </mwc-formfield>
+                    <mwc-formfield label="Mengalami sembelit (sulit buang air besar)">
+                        <mwc-checkbox class="child"></mwc-checkbox>
+                    </mwc-formfield>
+                    <mwc-formfield label="Sering tidur berlebihan">
+                        <mwc-checkbox class="child"></mwc-checkbox>
+                    </mwc-formfield>
+                    <mwc-formfield label="Sering merasa limbung (goyah/ tidak mantap) saat bangun">
+                        <mwc-checkbox class="child"></mwc-checkbox>
+                    </mwc-formfield>
+                    <mwc-formfield label="Memiliki gangguan konsentrasi">
+                        <mwc-checkbox class="child"></mwc-checkbox>
+                    </mwc-formfield>
+                    <mwc-formfield label="Merasa kurang fit/ sejahtera/ sehat">
+                        <mwc-checkbox class="child"></mwc-checkbox>
+                    </mwc-formfield>
+                    <mwc-formfield label="Sering sakit kepala">
+                        <mwc-checkbox class="child"></mwc-checkbox>
+                    </mwc-formfield>
+                    <mwc-formfield label="Selalu merasa kelelahan/ kecapekan">
+                        <mwc-checkbox class="child"></mwc-checkbox>
+                    </mwc-formfield>
+                    <mwc-formfield label="Memiliki Kulit yang kering">
+                        <mwc-checkbox class="child"></mwc-checkbox>
+                    </mwc-formfield>
 
+                    <p id="pengumuman">Bila anda menandai <a id="penting"><b>3 atau lebih indikator</b></a> maka anda disarankan untuk <a id="penting"><b>segera melakukan Pemeriksaan Detail untuk Diagnosa Diabetes Mellitus</b></a>.
+                    <br></br>
+                    Bila anda <a id="penting"><b>sudah melakukan Pemeriksaan Detail untuk Diagnosa Diabetes Mellitus</b></a>, harap segera <a id="penting"><b>hubungi dokter</b></a>.</p>
+                    </p>
+                    <br></br>
                     <p className="itemList">
                     Faktor-faktor diabetes mellitus dapat dijabarkan sebagai berikut : 
                     

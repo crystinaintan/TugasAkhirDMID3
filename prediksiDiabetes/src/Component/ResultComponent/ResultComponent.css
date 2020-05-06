@@ -36,3 +36,11 @@
     border-style: ridge;
     padding: 2% 0% 2% 2%;
 }
+
+
+#warning{
+    color: red;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
