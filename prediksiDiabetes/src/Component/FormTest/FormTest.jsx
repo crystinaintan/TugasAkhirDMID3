@@ -725,7 +725,6 @@ class FormTest extends React.Component{
             && this.state.keluarga!='' && this.state.keluargaD!='' && this.state.kulit!='' && this.state.lahir!='' && this.state.tinggi!='' && status) 
         {
             this.callapi(); //Panggil Fungsi untuk mengisi div hasil prediksi dengan hasil prediksi yg benar
-
             x.style.display = "block";
             y.style.display = "none";
             this.setState({resultExist : true});
@@ -743,12 +742,14 @@ class FormTest extends React.Component{
     go_predict_hover = ()=> {
         var x = document.getElementById("hasil");
         var y = document.getElementById("prediksi");
+        var status = this.getAgeFromLahir();
+        
         if (this.state.berat=='' || this.state.sistol=='' || this.state.diastol=='' || this.state.glukosa=='' || this.state.hamil=='' || this.state.insulin==''
             || this.state.keluarga=='' || this.state.keluargaD=='' || this.state.kulit=='' || this.state.lahir=='' || this.state.tinggi=='') 
         {
             document.getElementById("prediksi").style.cursor = "not-allowed";
             alert("Harap Isi Seluruh Kotak yang Ada!");
-            this.cek_Kolom();
+            this.cek_Kolom(status);
         }
         else{
             document.getElementById("prediksi").style.cursor = "pointer";
@@ -844,7 +845,7 @@ class FormTest extends React.Component{
                             <Tippy content='Tekanan Sistol / Batas Atas Tekanan Darah'><input className="input_component join" type="" value={this.state.sistol} id="quantity_sistol" onChange={this.handleSistolChange} onClick={this.callAlert} name="sistol" min="1" max=""></input></Tippy>
                             <label className="icon">/</label>
                             <Tippy content='Tekanan Diastol / Batas Bawah Tekanan Darah'><input className="input_component join" type="" value={this.state.diastol} id="quantity_diastol" onChange={this.handleDiastolChange} onClick={this.callAlert} name="diastol" min="1" max=""></input></Tippy><label className="input_component tipi">mmHg</label><br></br>
-                            <input className="input_component" type="" value={this.state.kulit} id="quantity_skin_thickness" onChange={this.handleKulitChange} onClick={this.callAlert} name="skin_thickness" min="1" max=""></input> <br></br>
+                            <input className="input_component" type="" value={this.state.kulit} id="quantity_skin_thickness" onChange={this.handleKulitChange} onClick={this.callAlert} name="skin_thickness" min="1" max=""></input><label className="input_component">mm</label> <br></br>
                             <Tippy content='Kadar Insulin dari Hasil Tes Darah'><input className="input_component" type="" value={this.state.insulin} id="quantity_cpeptida" onChange={this.handleInsulinChange} onClick={this.callAlert} name="cpeptida" min="1" max=""></input></Tippy><label className="input_component">ng/mL</label><br></br>
                             <input className="input_component" type="" value={this.state.berat} id="quantity_weight" onChange={this.handleBeratChange} onClick={this.callAlert} name="weight" min="1" max=""></input><label className="input_component">Kg</label><br></br>
                             <input className="input_component" type="" value={this.state.tinggi} id="quantity_height" onChange={this.handleTinggiChange} onClick={this.callAlert} name="height" min="1" max=""></input><label className="input_component">Cm</label><br></br>
