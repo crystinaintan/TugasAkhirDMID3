@@ -3,7 +3,6 @@ import './MiddleComponent.css';
 import FormTest from '../FormTest/FormTest';
 import Result from '../ResultComponent/ResultComponent';
 import diabetes from '../../Photo/diabetes.jpg';
-// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 
 class Middle extends React.Component{
@@ -17,14 +16,6 @@ class Middle extends React.Component{
             hasilCekFormTekananDarah:'Loading...'
         }
     }
-
-    // changeResultTest(data)
-    // {
-    //     this.setState({hasilCekFormDiabetes : data.diabetes});
-    //     this.setState({hasilCekFormImt : data.imt});
-    //     this.setState({hasilCekFormObesitas : data.obesitas});
-    //     this.setState({hasilCekFormTekananDarah : data.tekananDarah});
-    // }
 
     changeResultTestDiabetes(diabetes)
     {
@@ -64,7 +55,8 @@ class Middle extends React.Component{
                                     hasilCekFormDiabetes: this.state.hasilCekFormDiabetes,
                                     hasilCekFormImt: this.state.hasilCekFormImt,
                                     hasilCekFormObesitas: this.state.hasilCekFormObesitas,
-                                    hasilCekFormTekananDarah: this.state.hasilCekFormTekananDarah}}/>
+                                    hasilCekFormTekananDarah: this.state.hasilCekFormTekananDarah}
+                                }/>
             </div>
         );
     }

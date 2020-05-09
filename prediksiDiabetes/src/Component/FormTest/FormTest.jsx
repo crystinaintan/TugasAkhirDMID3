@@ -566,8 +566,6 @@ class FormTest extends React.Component{
                 "keluarga": this.state.keluarga,
                 "userBD" : this.state.lahir
             };
-        //console.log("Ini Adalah var data : ", data);
-        //console.log("Ini Adalah var stringify(data) : ", JSON.stringify(data));
         const url = "http://localhost:9000/api/prediksi_diabetes";
         
         const requestOptions = {
@@ -580,11 +578,6 @@ class FormTest extends React.Component{
         fetch(url, requestOptions)
         .then(res =>  res.json())
         .then(res => { 
-            //console.log(res)
-            // this.setState({resDiabetes : res[0].hasil.diabetes, 
-            //                resImt : res[0].hasil.imt,
-            //                resObesitas : res[0].hasil.obesitas,
-            //                resTekananDarah : res[0].hasil.tekananDarah})
               this.setState({resDiabetes : res.diabetes, 
                                resImt : res.imt,
                                resObesitas : res.obesitas,
@@ -829,7 +822,6 @@ class FormTest extends React.Component{
 
     render(){
         console.log("Render Form");
-        //fetch("http://localhost:9000");
         return(
             <form onSubmit={this.handleSubmit}>
                     <div className="content">

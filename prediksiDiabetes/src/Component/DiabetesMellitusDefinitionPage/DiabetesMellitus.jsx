@@ -3,8 +3,6 @@ import './DiabetesMellitus.css';
 import diabetes from '../../Photo/diabetes.jpg';
 import dm from '../../Photo/DM.jpg';
 import { Link } from 'react-router-dom';
-// import Checkbox from '@material/react-checkbox';
-// import "@material/react-checkbox/dist/checkbox.css";
 import '@material/mwc-checkbox';
 import '@material/mwc-formfield';
 
