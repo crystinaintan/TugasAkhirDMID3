@@ -13,7 +13,15 @@ const fs = require('fs');       // import modul fs untuk membaca dan menulis dat
     
 
 function diabetesPedigreeFunction(n_keluargaDm, n_keluarga){
-    return n_keluargaDm/n_keluarga;
+    const hasil = parseFloat((n_keluargaDm/n_keluarga).toFixed(3));
+    if(hasil < 0.10)
+    {
+        return 0.10;
+    }
+    else{
+        return hasil;
+    }
+    //return (n_keluargaDm/n_keluarga);
 }
 
 function calculate_bmi(berat, tinggi){
@@ -76,7 +84,8 @@ function status_diabetes(status){
 } 
 
 function convertC_peptide(value){
-    return (value*0.333*1000)/6.9450
+    return parseFloat(((value*0.333*1000)/6.9450).toFixed(3));
+    //return ((value*7.1429)/6).toFixed(2);
 }
 
 
@@ -85,41 +94,20 @@ router.get("/", function(req, res, next) {
 });
 
 router.post("/prediksi_diabetes", function(req, res, next){
-    // var predicted_class_a = dt_a.predict({                          //memprediksi berdasarkan data baru, predicted_class_a (hasil prediksi data baru)
-    //     Pregnancies: req.params.hamil,
-    //     Glucose: req.params.glukosa,
-    //     BloodPressure: req.params.diastol,//diastolic
-    //     SkinThickness: req.params.kulit,
-    //     Insulin: req.params.insulin,
-    //     BMI: calculate_bmi(req.params.berat, req.params.tinggi),
-    //     DiabetesPedigreeFunction: diabetesPedigreeFunction(this.req.params.keluargaD, req.params.keluarga),                          
-    //     Age: req.params.lahir
-    // });
     csv()
     .fromFile(csvFilePath)
     .then((jsonObj)=>{              //jsonObj adalah variable yang memuat data file diabetes.csv yang sudah dalam bentuk json
-        //console.log(jsonObj);
         var class_name_a = "Outcome"; //atribut yang akan ditebak
         var features_a = ["Pregnancies", "Glucose","BloodPressure","SkinThickness","Insulin","BMI","DiabetesPedigreeFunction","Age"]; //atribut feature
         var dt_a = new DecisionTree(jsonObj, class_name_a, features_a);  //generate model tree
-        // var predicted_class_a = dt_a.predict({                          //memprediksi berdasarkan data baru, predicted_class_a (hasil prediksi data baru)
-        //     Pregnancies: '6',
-        //     Glucose: '148',
-        //     BloodPressure: '72',
-        //     SkinThickness: '35',
-        //     Insulin: '0',
-        //     BMI: '33.6',
-        //     DiabetesPedigreeFunction: '0.627',                          
-        //     Age: '50'
-        // });
         const body = req.body;
         console.log("Data Kiriman dari frontend : ", body.hamil);
-        const imt = calculate_bmi(body.berat, body.tinggi);
+        const imt = parseFloat(calculate_bmi(body.berat, body.tinggi).toFixed(2));
         const diabetesPedigree = diabetesPedigreeFunction(body.keluargaD, body.keluarga);
         const c_peptide = convertC_peptide(body.insulin);
-        // console.log("INSULIN HASIL LAB :",body.insulin);
-        // console.log("HASIL CONVERT INSULIN : ", c_peptide);
-       
+        console.log("Ini C-Peptide Hasil Convert: ",c_peptide);
+        console.log("Ini persetage diabetes Hasil Convert: ",diabetesPedigree);
+
         var predicted_class_a = dt_a.predict({                          //memprediksi berdasarkan data baru, predicted_class_a (hasil prediksi data baru)
             Pregnancies: body.hamil,
             Glucose: body.glukosa,
@@ -146,13 +134,6 @@ router.post("/prediksi_diabetes", function(req, res, next){
             "keluarga": body.keluarga
         };
 
-        // var save_dataUser = JSON.stringify(dataUser);
-
-        // fs.writeFile('./userdata.json', save_dataUser , (err) => {  //Menyimpan model tree berupa json ke dalam file message.json
-        //     if (err) throw err;
-        //     console.log('The file has been saved!');
-        // });
-
         const hasil =  {
             "diabetes" : status_diabetes(predicted_class_a),
             "imt" : imt,
@@ -160,18 +141,9 @@ router.post("/prediksi_diabetes", function(req, res, next){
             "tekananDarah" : status_hipertensi(body.sistol, body.diastol)
         };
 
-        //const load_data_user = dataUser;
-        //const send_data = [{"hasil": hasil, "datauser" : load_data_user}];
-        // console.log(hasil.result[0].imt);
-        // console.log(req.body.hamil);
-        //console.log(JSON.stringify(hasil));
-        //console.log("API HASIL SEND : ", send_data);
-        //console.log("save data user dalam file : ", save_dataUser);
         res.send(JSON.stringify(hasil)); 
         
     });
-    
-    // res.send(hasil);
 });
 
 module.exports = router; 
