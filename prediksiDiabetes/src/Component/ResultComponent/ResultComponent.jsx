@@ -1,7 +1,6 @@
 import React from 'react';
 import './ResultComponent.css';
 import { Link } from 'react-router-dom';
-// import FormTest from '../FormTest/FormTest';
 
 class Result extends React.Component{
     constructor(props){

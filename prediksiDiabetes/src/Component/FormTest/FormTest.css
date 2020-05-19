@@ -7,7 +7,6 @@
 
 .label{
     position: relative;
-    /* margin: 7% 0% 0% 5%; */
     margin: 8% 0% 0% 5%;
     color: black;
     width: 35%;
@@ -17,7 +16,6 @@
 
 .input{
     position: relative;
-    /* margin: 7% 0% 0% 0%; */
     margin: 8% 0% 0% 0%;
     overflow-x: hidden;
     padding: 0;

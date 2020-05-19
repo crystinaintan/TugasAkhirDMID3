@@ -35,7 +35,7 @@ class DiabetesMellitus extends React.Component{
                     <mwc-formfield label="Memiliki berat badan berlebih (mengalami kegemukan)">
                         <mwc-checkbox class="child"></mwc-checkbox>
                     </mwc-formfield>
-                    <mwc-formfield label="Selalu merasa butuh asupan karbohidrat)">
+                    <mwc-formfield label="Selalu merasa butuh asupan karbohidrat">
                         <mwc-checkbox class="child"></mwc-checkbox>
                     </mwc-formfield>
                     <mwc-formfield label="Selalu merasa lapar">

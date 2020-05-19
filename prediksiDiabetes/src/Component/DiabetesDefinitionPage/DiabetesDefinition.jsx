@@ -25,7 +25,7 @@ class Diabetes extends React.Component{
                     Sedangkan untuk kadar glukosa dalam darah manusia dapat dikatakan rendah bila gula darah berada di bawah 70 mg/dL. 
                     Sedangkan untuk kadar glukosa dalam darah manusia dapat dikatakan tinggi bila gula darah berada di atas 200 mg/dL. 
                     Menurut WHO, kadar gula (glukosa) darah yang rendah atau di bawah nilai normal adalah berkisar 6,0 mmol/L atau lebih rendah (di bawah 110 mg/dL). 
-                    Selain karena kadar gula, resisten insulin dapat juga mengakibatkan penyakit diabetes mellitus. 
+                    Selain karena kadar gula, resisten insulin dapat juga mengakibatkan penyakit diabetes mellitus. Kadar insulin Normal adalah sekitar 0,5 ng/mL hingga 2,0 ng/mL.
                     </p>
                     <p className="itemList">
                         Resisten insulin adalah keadaan tubuh manusia ketika sel-sel tubuh tidak dapat menggunakan gula darah dengan baik karena 

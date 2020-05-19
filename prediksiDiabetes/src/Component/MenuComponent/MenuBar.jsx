@@ -5,7 +5,6 @@ import List, { ListItem, ListItemText } from '@material/react-list';
 import "@material/react-drawer/dist/drawer.css";
 import '@material/react-list/dist/list.css';
 import { Link } from 'react-router-dom';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 
 class MenuBar extends React.Component {
@@ -18,19 +17,23 @@ class MenuBar extends React.Component {
         }
     }
 
-    handleClick = index => {
-        const selectedItem = this.state.selectedIndex[index];
-        this.setState({ selectedIndex: selectedItem });
-        console.log(this.state.selectedIndex);
+    setLocalStorageForMenuBar = (nextProps,nextState) =>{
+        localStorage.setItem('menubaritem', JSON.stringify(nextState.selectedIndex));
     }
 
-    updateState = event => {
-        this.setState({ selectedIndex: event.target.value, itemSelected: true });
-        console.log(event.target.value);
+    componentWillUpdate = (nextProps, nextState) => {
+        this.setLocalStorageForMenuBar(nextProps,nextState);
+        console.log(this.state.selectedIndex);
+        console.log("Component Menubar WILL Update");
+    }
+
+    componentWillMount = () =>{
+        this.setState({ selectedIndex: JSON.parse(localStorage.getItem('menubaritem'))});
     }
 
     render() {
         return (
+            console.log("menubar render"),
             <div className="menu">
                 <Drawer className="drawer">
                     <DrawerContent className= "drawercontent">
@@ -42,7 +45,7 @@ class MenuBar extends React.Component {
                         >
                             <ListItem>
                                 <Link to="/test_diabetes_mellitus" exact>
-                                    <ListItemText id="" className="list_item" primaryText='Deteksi Diabetes' />
+                                    <ListItemText id="" className="list_item" primaryText='Deteksi Diabetes'/>
                                 </Link>
                             </ListItem>
                             <ListItem>
