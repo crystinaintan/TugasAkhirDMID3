@@ -8,6 +8,7 @@ router.use(cors());
 var DecisionTree = require('decision-tree'); 
 
 const csvFilePath='./dataset/diabetes.csv'; 
+//const csvFilePath='./dataset/clear_diabetes.csv'; 
 const csv=require('csvtojson'); //import modul csvtojson untuk mengubah data diabetes.csv menjadi kumpulan / array of json (Harus npm i --save csvtojson)
 const fs = require('fs');       // import modul fs untuk membaca dan menulis data kedalam file (menyimpan model tree yang telah digenerate ke dalam file message.json)
     
@@ -57,16 +58,28 @@ function status_hipertensi(sistol, diastol){
     {
         status = "Hipotensi";
     }
-    else if(sistol >= 90 && sistol <=120 && diastol >= 60 && diastol <=80)
+    else if(sistol >= 90 && sistol < 120 && diastol >= 60 && diastol < 80)
     {
         status = "Normotensi";
     }
-    else if(sistol > 120 && diastol >=80)
+    else if(sistol >= 120 && sistol<= 129 && diastol >=80)
     {
-        status = "Hipertensi";
+        status = "Prahipertensi";
+    }
+    else if(sistol >= 130 && sistol<= 139 && diastol >=80 && diastol <=89)
+    {
+        status = "Hipertensi Derajat 1";
+    }
+    else if(sistol >= 140 && sistol <= 180 && diastol >=90 && diastol <=120)
+    {
+        status = "Hipertensi Derajat 2";
+    }
+    else if(sistol > 180 && diastol >120)
+    {
+        status = "Krisis Hipertensi";
     }
     else{
-        status = "Tekanan darah anda Unik"
+        status = "Tekanan darah anda di luar kasus normal"
     }
     console.log(status);
     return status;
@@ -88,6 +101,11 @@ function convertC_peptide(value){
     //return ((value*7.1429)/6).toFixed(2);
 }
 
+function calculateSkinThickness(value){
+    return parseFloat(value/2.0);
+    //return ((value*7.1429)/6).toFixed(2);
+}
+
 
 router.get("/", function(req, res, next) {
     res.send("API is working properly");
@@ -105,14 +123,18 @@ router.post("/prediksi_diabetes", function(req, res, next){
         const imt = parseFloat(calculate_bmi(body.berat, body.tinggi).toFixed(2));
         const diabetesPedigree = diabetesPedigreeFunction(body.keluargaD, body.keluarga);
         const c_peptide = convertC_peptide(body.insulin);
+        const skin_thickness = calculateSkinThickness(body.kulit);
+        
         console.log("Ini C-Peptide Hasil Convert: ",c_peptide);
+        console.log("Ini Skin Thickness: ",skin_thickness);
         console.log("Ini persetage diabetes Hasil Convert: ",diabetesPedigree);
+        console.log("Ini umur : ",body.lahir);
 
         var predicted_class_a = dt_a.predict({                          //memprediksi berdasarkan data baru, predicted_class_a (hasil prediksi data baru)
             Pregnancies: body.hamil,
             Glucose: body.glukosa,
             BloodPressure: body.diastol,//diastolic
-            SkinThickness: body.kulit,
+            SkinThickness: skin_thickness,
             Insulin: c_peptide,
             BMI: imt,
             DiabetesPedigreeFunction: diabetesPedigree,                          
@@ -140,7 +162,7 @@ router.post("/prediksi_diabetes", function(req, res, next){
             "obesitas" : status_BMI(imt),
             "tekananDarah" : status_hipertensi(body.sistol, body.diastol)
         };
-
+        console.log("Ini DIABETES Hasil Convert: ",predicted_class_a);
         res.send(JSON.stringify(hasil)); 
         
     });
