@@ -12,8 +12,9 @@ class MenuBar extends React.Component {
         super(props)
 
         this.state = {
-            selectedIndex: 0,
-            hoverItem: ''
+            selectedIndex: 0
+            //,
+            //hoverItem: ''
         }
     }
 
